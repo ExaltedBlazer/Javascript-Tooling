@@ -32,7 +32,7 @@ var add = function (value, description, user) {
 add(10, 'Pizza 🍕');
 add(100, 'Going to movies 🍿', 'Matilda');
 add(200, 'Stuff', 'Jay');
-console.log(budget);
+//console.log(budget);
 
 var check = function () {
   for (var el of budget) {
@@ -50,7 +50,7 @@ var check = function () {
 };
 check();
 
-console.log(budget);
+//console.log(budget);
 
 var bigExpenses = function (limit) {
   var output = '';
