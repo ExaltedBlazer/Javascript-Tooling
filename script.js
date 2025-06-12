@@ -1,20 +1,20 @@
 //Importing module
 //import { addToCart, totalPrice, totalQuantity } from '/shoppingCart.js';
 
-// console.log('Importing Module');
+console.log('Importing Module');
 // console.log(shippingCost);
 
 //addToCart('bread', 5);
 //console.log(totalPrice, totalQuantity);
 
-/*
 import add, { cart } from './shoppingCart.js';
 add('pizza', 2);
 add('bread', 5);
 add('apples', 4);
 
-// console.log(cart);
+console.log(cart);
 
+/*
 //console.log('Start fetching');
 //const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 //const data = await res.json();
@@ -84,8 +84,9 @@ const { addToCart } = require('./shoppingCart.js');
 */
 //import { cloneDeep } from ',/node_modules/lodash-es/cloneDeep.js';
 
-import { cloneDeep } from 'lodash';
-import { cart } from './shoppingCart';
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+//import { cart } from './shoppingCart.js';
+//import { cloneDeep } from './lodash-es';
 
 const state = {
   cart: [
@@ -94,3 +95,36 @@ const state = {
   ],
   user: { loggedIn: true },
 };
+
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+state.user.loggedIn = false;
+console.log(stateClone);
+
+console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept();
+}
+
+class person {
+  greeting = 'Hey';
+  constructor(name) {
+    this.name = name;
+    console.log(`${this.greeting}, ${this.name}`);
+  }
+}
+const exalted = new person('Exalted');
+
+console.log('Exalted' ?? null);
+
+console.log(cart.find(el => el.quantity >= 2));
+Promise.resolve('Test').then(x => console.log(x));
+
+import 'core-js/stable';
+//import 'core-js/stable/array/find';
+//import 'core-js/stable/promise';
+
+//Polifilling async functions
+import 'regenerator-runtime/runtime';

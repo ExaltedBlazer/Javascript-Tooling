@@ -2,14 +2,20 @@
   "name": "javascript-tooling",
   "version": "1.0.0",
   "description": "Javascript tooling",
-  "main": "script.js",
+  "default": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Kaden",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.43.0",
     "leaflet": "^1.9.4",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "regenerator-runtime": "^0.14.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.15.2"
   }
 }
