@@ -1,3 +1,5 @@
+'use strict';
+
 const budget = [
   { value: 250, description: 'Sold old TV 📺', user: 'exalted' },
   { value: -45, description: 'Groceries 🥑', user: 'exalted' },
@@ -9,10 +11,12 @@ const budget = [
   { value: -1800, description: 'New Laptop 💻', user: 'exalted' },
 ];
 
-const spendingLimits = {
+const spendingLimits = Object.freeze({
   exalted: 1500,
   matilda: 100,
-};
+});
+spendingLimits.jay = 200;
+console.log(spendingLimits);
 
 const getLimit = user => spendingLimits?.[user] ?? 0;
 
