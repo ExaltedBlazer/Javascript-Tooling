@@ -28,7 +28,7 @@ const spendingLimits = Object.freeze({
 
 //==========================================================================================//
 //const limit = spendingLimits[user] ? spendingLimits[user] : 0;
-const getLimit = user => spendingLimits?.[user] ?? 0;
+const getLimit = (limits, user) => limits?.[user] ?? 0;
 //==========================================================================================//
 
 //==========================================================================================//
@@ -40,7 +40,9 @@ const addExpense = function (
   user = 'exalted'
 ) {
   const cleanUser = user.toLowerCase();
+  //==========================================================================================//
 
+  //==========================================================================================//
   // let lim;
   // if (spendingLimits[user]) {
   //   lim = spendingLimits[user];
@@ -49,14 +51,14 @@ const addExpense = function (
   // }
 
   //const limit = getLimit(user);
-  console.log(getLimit(cleanUser));
-  return value <= getLimit(cleanUser)
+  //console.log(getLimit(cleanUser));
+  return value <= getLimit(limits, cleanUser)
     ? [...state, { value: -value, description: description, user: cleanUser }]
     : state;
   //budget.push({ value: -value, description: description, user: cleanUser });
 };
-
 //==========================================================================================//
+
 //==========================================================================================//
 const newBudget1 = addExpense(budget, spendingLimits, 10, 'Pizza 🍕');
 const newBudget2 = addExpense(
@@ -67,25 +69,30 @@ const newBudget2 = addExpense(
   'Matilda'
 );
 const newBudget3 = addExpense(newBudget2, spendingLimits, 200, 'Stuff', 'Jay');
-console.log(newBudget3);
-//==========================================================================================//
 //==========================================================================================//
 
-const checkExpenses = function () {
-  // let lim;
-  // if (spendingLimits[entry.user]) {
-  //   lim = spendingLimits[entry.user];
-  // } else {
-  //   lim = 0;
-  // }
+//==========================================================================================//
+//console.log(budget[1].value);
+// const checkExpenses2 = function (state, limits) {
+//   return state.map(entry => {
+//     return entry.value < -getLimit(limits, entry.user)
+//       ? { ...entry, flag: 'limit' }
+//       : entry;
+//   });
+// };
 
-  // const limit = spendingLimits?.[entry.user] ?? 0;
+const checkExpenses = (state, limits) =>
+  state.map(entry =>
+    entry.value < -getLimit(limits, entry.user)
+      ? { ...entry, flag: 'limit' }
+      : entry
+  );
 
-  for (const entry of budget)
-    if (entry.value < -getLimit(entry.user)) entry.flag = 'limit';
-};
-checkExpenses();
+const finalBudget = checkExpenses(newBudget3, spendingLimits);
+console.log(finalBudget);
+//==========================================================================================//
 
+//==========================================================================================//
 const logBigExpenses = function (biglimit) {
   let output = '';
   for (const entry of budget)
@@ -101,3 +108,4 @@ const logBigExpenses = function (biglimit) {
 
 console.log(budget);
 logBigExpenses(1000);
+console.log(getLimit);
